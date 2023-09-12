@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import Personaje from './components/personajes.vue'
 
-const url = 'https://rickandmortyapi.com/api/character'
+const url = 'https://rickandmortyapi.com/api/character/'
 const id = ref('1')
 const personajeObtenido = ref(null)
 
@@ -18,7 +18,7 @@ const ObtenerPersonaje = () => {
         .then(data => {
             //manipula los datos obtenidos
             console.log(data);
-            personajeObjeto.value = data
+            personajeObtenido.value = data
         })
         .catch(error => {
             console.error(error);
@@ -30,13 +30,12 @@ const ObtenerPersonaje = () => {
 <template>
         <div class="container">
         <h1>Componentes</h1>
-{{ personajeObtenido.name }} 
         <hr>
         <input type="text" v-model=id >
         <hr>
         <button @click="ObtenerPersonaje()">Obtener</button>
         <hr>
-        <Personaje :nombre=personajeObtenido.name></Personaje>                  
+        <Personaje v-if="personajeObtenido!=null" :personaje=personajeObtenido></Personaje>
     </div>
 </template>
 
