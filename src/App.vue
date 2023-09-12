@@ -28,7 +28,7 @@ const ObtenerPersonaje = () => {
 </script>
 
 <template>
-         <div class="container">
+        <div class="container">
         <h1>Componentes</h1>
 {{ personajeObtenido.name }} 
         <hr>
