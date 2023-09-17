@@ -6,6 +6,7 @@ import Personaje from './components/Personaje.vue'
 const url = 'https://rickandmortyapi.com/api/character/'
 const pagina = ref(1)
 const listaPersonajes = ref([])
+const personajeSeleccionado = ref(null)
 
 const ObtenerPersonaje = () => {
     fetch(url + pagina.value)
