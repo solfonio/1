@@ -1,14 +1,13 @@
 <script setup>
-import { ref, onMounted} from 'vue'
+import { ref, onMounted } from 'vue'
 import Personaje from './components/Personaje.vue'
-
-
-const url = 'https://rickandmortyapi.com/api/character/'
+const url = 'https://rickandmortyapi.com/api/character/?page='
 const pagina = ref(1)
 const listaPersonajes = ref([])
 const personajeSeleccionado = ref(null)
 
 const ObtenerPersonaje = () => {
+    //Arma el link con la pagina 
     fetch(url + pagina.value)
         .then(response => {
             if (response.status === 200) {
@@ -29,8 +28,8 @@ onMounted(() => {
     ObtenerPersonaje()
 })
 
-const Seleccionar = (indice) => {
-    personajeSeleccionado.value = listaPersonajes.value[indice]
+function Seleccionar(id) {
+    personajeSeleccionado.value = listaPersonajes.value[id]
 }
 
 const Actualizar = (valor) => {
@@ -50,9 +49,7 @@ const Actualizar = (valor) => {
 
 
     </div>
-
     <hr>
-
     <div class="row">
         <div class="col-6">
             <table class="table">
@@ -68,14 +65,11 @@ const Actualizar = (valor) => {
         </div>
         <div class="col-6">
             <div class="row">
-                <Personaje v-if="personajeSeleccionado != null" 
-                :personaje="personajeSeleccionado"></Personaje>
+                <Personaje v-if="personajeSeleccionado != null" :personaje="personajeSeleccionado"></Personaje>
             </div>
-            
+
         </div>
     </div>
-
-
 </template>
 
 <style scoped></style>
