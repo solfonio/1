@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import Personaje from './components/Personaje.vue'
+import Episodio from "./components/Episodios.vue"
 const url = 'https://rickandmortyapi.com/api/character/?page='
 const pagina = ref(1)
 const listaPersonajes = ref([])
@@ -24,12 +25,18 @@ const ObtenerPersonaje = () => {
         });
 }
 
+
 onMounted(() => {
     ObtenerPersonaje()
 })
 
 function Seleccionar(id) {
     personajeSeleccionado.value = listaPersonajes.value[id]
+}
+
+function ObtenerEpisodios(id){
+    id = Seleccionar(id)
+    
 }
 
 const Actualizar = (valor) => {
@@ -60,12 +67,15 @@ const Actualizar = (valor) => {
                     <td>{{ personaje.id }}</td>
                     <td>{{ personaje.name }}</td>
                     <td><button class="btn btn-primary" @click="Seleccionar(index)">Seleccionar!</button></td>
-                </tr>
+                </tr>   
             </table>
         </div>
         <div class="col-6">
             <div class="row">
                 <Personaje v-if="personajeSeleccionado != null" :personaje="personajeSeleccionado"></Personaje>
+            </div>
+            <div class="row">
+                <Episodio  v-if="personajeSeleccionado != null" :episodios="personajeSeleccionado.episode"> </Episodio>        
             </div>
 
         </div>
